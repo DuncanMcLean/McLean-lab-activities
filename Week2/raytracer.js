@@ -23,18 +23,18 @@ export function Scene(surface) {
 /* Generate viewing ray through the pixel with given coordinates */
 Scene.prototype.project = function(i, j) {
   // TODO compute u and v
-  const top = undefined;
-  const right = undefined;
-  const bottom = undefined;
-  const left = undefined;
-  const u = undefined;
-  const v = undefined;
+  const top = this.camera.d * Math.tan(fov);
+  const right = top * this.camera.aspect;
+  const bottom = -top;
+  const left = -right;
+  const u = left + (right - left) * (i + 0.5) / this.image.width;
+  const v = bottom + (top - botom) * (j + 0.5) / this.image.height;
 
   return {
-    // TODO use u and v to compute the ray direction
-    direction: undefined,
+    // TODO use u and v to compute the ray direction  Vec.mult needed
+    direction: (Vec.mult(this.camera.d, this.camera.w)) + (Vec.mult(this.camera.u), u) + (Vec.multi(this.camera.v, v)),
     // TODO ray origin for perspective viewing is just the eye position
-    origin: undefined
+    origin: this.camera.e
   };
 };
 
@@ -42,7 +42,11 @@ Scene.prototype.project = function(i, j) {
 Scene.prototype.shade = function(hit) {
   // TODO In the event of a hit return the color of the intersecting object.
   //  Otherwise return the background color.
-  undefined;
+  if (hit){
+    ;
+  } else{
+    return this.backgroundColor;
+  }
 };
 
 /* Basic ray tracing algorithm. */

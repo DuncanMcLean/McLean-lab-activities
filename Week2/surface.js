@@ -32,12 +32,12 @@ export function Sphere(center, radius, color) {
 
 Sphere.prototype.intersect = function({origin, direction}) {
   // TODO Compute the quadratic coefficients A, B, and C
-  const A  = undefined;
-  const ec = undefined;
-  const B  = undefined;
-  const C  = undefined;
+  const A  = Vec.dot(direction, direction); // A = d . d
+  const ec = Vec.diff(origin, this.center);
+  const B  = Vec.dot((2*direction), (origin - this.center)); // B = 2d . (e-c)
+  const C  = Vec.dot((origin - this.center), (origin - this.center)); // (e-c) . (e-c)
   // TODO Compute the discriminant
-  const discriminant = undefined;
+  const discriminant = (b*b) - 4*(a*c);
   // TODO Check whether intersection exists and return an appropriate Hit object
   if (discriminant >= 0) {
     return new Hit(this, (-B - Math.sqrt(discriminant)) / A);
